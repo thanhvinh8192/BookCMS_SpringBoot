@@ -1,4 +1,4 @@
-package config;
+package SpringBoot.BookCMS_SpringBoot.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -10,11 +10,11 @@ import java.sql.SQLException;
 
 @Configuration
 public class ConnectionConfig {
-    @Value("{$database.url}")
+    @Value("${database.url}")
     String url;
-    @Value("{$database.user}")
+    @Value("${database.user}")
     String user;
-    @Value("{$database.pass}")
+    @Value("${database.pass}")
     String password;
 
     @Bean
@@ -28,7 +28,6 @@ public class ConnectionConfig {
         }
         try {
             conn = DriverManager.getConnection(url, user, password);
-            System.out.println("MySQL Database connection to successfully");
         } catch (
                 SQLException sqlEx) {
             System.out.println(sqlEx);

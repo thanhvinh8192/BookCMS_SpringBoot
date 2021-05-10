@@ -1,7 +1,7 @@
-package services;
+package SpringBoot.BookCMS_SpringBoot.services;
 
-import controller.request.LoginRequest;
-import controller.request.RegisterRequest;
+import SpringBoot.BookCMS_SpringBoot.controller.request.LoginRequest;
+import SpringBoot.BookCMS_SpringBoot.controller.request.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
@@ -19,7 +19,7 @@ public class UserServices {
 
     public String register(RegisterRequest register){
         //Check Phone number
-        if(register.getPhoneNumber() == null || register.getPhoneNumber() == "" || register.getPhoneNumber().length() != 10){
+        if(register.getPhoneNumber() == null || register.getPhoneNumber().equals("") || register.getPhoneNumber().length() != 11){
             return "Phone number is not correct";
         }
 
@@ -34,19 +34,20 @@ public class UserServices {
         }
 
         //Query Database
-        String sqlQuery = "SELECT * FROM manage_book_market.USER WHERE PhoneNumber = '" + register.getPhoneNumber() + "'" + "OR Email = '" + register.getEmail() + "';";
+        String sqlQuery = "SELECT * FROM manage_book_market.USER WHERE PhoneNumber = '" + register.getPhoneNumber() + "'" + " OR Email = '" + register.getEmail() + "';";
         try {
             Statement stm = connection.createStatement();
             ResultSet rs = stm.executeQuery(sqlQuery);
             while (rs.next()){
                 return "Phone number or email is exists";
             }
-
             //Insert user
-            String sqlInsertUser = "INSERT INTO `manage_book_market`.`USER` (`PhoneNumber`, `Username`, `Password`, `Email`) VALUES ('" + register.getPhoneNumber() + "', '" + register.getUserName() + "', '" + register.getPassword() + "', '" + register.getEmail() + ");\n";
-            stm.executeUpdate(sqlInsertUser);
+            sqlQuery ="INSERT INTO `manage_book_market`.`USER` (`PhoneNumber`, `Username`, `Password`, `Email`) " +
+                    "VALUES ('" + register.getPhoneNumber() + "', '" + register.getUserName() + "', '" + register.getPassword() + "', '" + register.getEmail() + "');";
+            stm.executeUpdate(sqlQuery);
             stm.close();
-        } catch (SQLException sqlException) {
+        }
+        catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
 
@@ -56,19 +57,16 @@ public class UserServices {
     public String login(LoginRequest request){
         //Query database
         String sqlQuery = "SELECT * FROM manage_book_market.USER WHERE PhoneNumber = '" + request.getPhoneNumber() + "'";
-        String msg = "";
         try {
             Statement stm = connection.createStatement();
             ResultSet rs = stm.executeQuery(sqlQuery);
             while (rs.next()) {
                 if(request.getPhoneNumber().equals(rs.getString("PhoneNumber"))){
                     if(request.getPassword().equals(rs.getString("Password"))){
-                        return  msg ="Login Success";
+                        return  "Login Success";
                     }
-                    else return msg = "Email or Password is incorrect";
+                    else return "Email or Password is incorrect";
                 }
-                else return msg = "Account is not exist!";
-
             }
             stm.close();
         }
@@ -76,6 +74,6 @@ public class UserServices {
         {
             System.out.println(sqlException);
         }
-        return msg;
+        return "Account is not exist!";
     }
 }

@@ -1,13 +1,13 @@
-package controller;
+package SpringBoot.BookCMS_SpringBoot.controller;
 
-import controller.request.LoginRequest;
-import controller.request.RegisterRequest;
+import SpringBoot.BookCMS_SpringBoot.controller.request.LoginRequest;
+import SpringBoot.BookCMS_SpringBoot.controller.request.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import services.UserServices;
+import SpringBoot.BookCMS_SpringBoot.services.UserServices;
 
 @RestController
 @RequestMapping(value = "/user")

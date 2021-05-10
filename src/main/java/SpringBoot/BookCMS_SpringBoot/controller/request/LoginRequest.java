@@ -1,4 +1,4 @@
-package controller.request;
+package SpringBoot.BookCMS_SpringBoot.controller.request;
 
 
 import lombok.Getter;
