@@ -25,7 +25,7 @@ public class UserServices {
 
         //Check Email
         if(StringUtils.isEmpty(register.getEmail()) || !register.getEmail().contains("@gmail.com")){
-            return "Email khong hop le";
+            return "Email must be Gmail";
         }
 
         //Check Password
@@ -49,6 +49,7 @@ public class UserServices {
         }
         catch (SQLException sqlException) {
             sqlException.printStackTrace();
+            return "Register failed by internal error";
         }
 
         return "Register Success";
