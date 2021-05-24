@@ -1,3 +1,4 @@
+/*
 package SpringBoot.BookCMS_SpringBoot.config;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -35,3 +36,4 @@ public class ConnectionConfig {
         return conn;
     }
 }
+*/

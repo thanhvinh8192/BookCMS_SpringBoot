@@ -12,10 +12,11 @@ public class BookController {
 
     @Autowired
     BookServices bookServices;
+
     @GetMapping(value = "/{category-id}")
     public BookListResponse getBookByCategoryID(@PathVariable(name = "category-id") Integer cateID,
                                                 @RequestParam(name = "order", defaultValue = "ASC")String order,
-                                                @RequestParam(name = "orderBy", defaultValue ="title" ) String orderBy){
+                                                @RequestParam(name = "orderBy", defaultValue ="Title" ) String orderBy){
         return  bookServices.getBookByCategoryID(cateID, order, orderBy);
     }
 }

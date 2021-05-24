@@ -14,12 +14,12 @@ import java.sql.Statement;
 @Service
 public class UserServices {
 
-    @Autowired
+    //@Autowired
     Connection connection;
 
     public String register(RegisterRequest register){
         //Check Phone number
-        if(register.getPhoneNumber() == null || register.getPhoneNumber().equals("") || register.getPhoneNumber().length() != 11){
+        if(register.getPhoneNumber() == null || register.getPhoneNumber().equals("") || register.getPhoneNumber().length() != 10){
             return "Phone number is not correct";
         }
 
